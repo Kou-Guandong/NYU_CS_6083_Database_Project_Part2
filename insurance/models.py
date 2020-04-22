@@ -16,6 +16,8 @@ class Customer(models.Model):
     ))
     customer_type = models.CharField(max_length=2, null=True)
 
+    def __str__(self):
+        return self.first_name + ' ' + self.last_name
 
 class Policy(models.Model):
     start_date = models.DateField()
@@ -27,6 +29,9 @@ class Policy(models.Model):
         return 'C' if self.end_date >= date.today() else 'P'
     # class Meta:
     #    abstract = True
+
+    def __str__(self):
+        return self.customer.first_name + ' ' + self.customer.last_name + ': ' + str(self.insurance_amount)
 
 
 class Home(models.Model):
@@ -57,6 +62,9 @@ class Home(models.Model):
         ('0', 'NO basement')
     ))
     policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.policy) + ' purchased at: ' + str(self.purchase_date)
 
 
 class Vehicle(models.Model):
