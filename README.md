@@ -1,10 +1,14 @@
+This is a course project for CS-GY 6083 Spring 2020 semester in NYU Tandon School of Engineering.
 
-# Pre-Development
+# Environment & Skillet
+- Python 3.7
+- PostgreSQL
+
 
 ## Install dependencies
 ```shell
-brew install postgresql
-pip install psycopg2-binary==2.8.3
+brew install postgresql # if PostgreSQL not installed 
+pip install psycopg2-binary==2.8.3  # use a stable version  
 ```
 
 ## Migrate database when model changed
