@@ -14,6 +14,7 @@ class Customer(models.Model):
         ('S', 'Single'),
         ('W', 'Widow/Widower')
     ))
+    customer_type = models.CharField(max_length=2, null=True)
 
 
 class Policy(models.Model):
@@ -37,7 +38,7 @@ class Home(models.Model):
         ('C', 'Condominium'),
         ('T', 'Town house')
     ))
-    fire_notification = models.CharField(max_length=1, choices=(
+    auto_fire_notification = models.CharField(max_length=1, choices=(
         ('1', 'has automatic fire notification'),
         ('0', 'NO automatic fire notification')
     ))
