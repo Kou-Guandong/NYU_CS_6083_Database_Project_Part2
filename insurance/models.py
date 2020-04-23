@@ -78,15 +78,15 @@ class Vehicle(models.Model):
 
 
 class Driver(models.Model):
-    license_number = models.CharField(max_length=17)
+    license_number = models.CharField(max_length=17, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    birth_date = models.DateTimeField()
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, null=True)
+    birth_date = models.DateField()
+    vehicle_vin = models.ForeignKey(Vehicle, db_column='vehicle_vin', on_delete=models.SET_NULL, null=True)
 
 
 class Invoice(models.Model):
-    policy = models.ForeignKey(Policy, on_delete=models.CASCADE)
+    policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
     issue_date = models.DateTimeField()
     due_date = models.DateTimeField()
     invoice_amount = models.FloatField()
