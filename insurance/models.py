@@ -25,12 +25,10 @@ class Policy(models.Model):
     end_date = models.DateField()
     insurance_amount = models.FloatField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    policy_type = models.CharField(max_length=1, choices=(('H', 'Home'), ('A', 'Auto')), default='H')
 
-    def home_policy_status(self):
+    def policy_status(self):
         return 'C' if self.end_date >= date.today() else 'P'
-
-    # class Meta:
-    #    abstract = True
 
     def __str__(self):
         return self.customer.first_name + ' ' + self.customer.last_name + ': ' + str(self.insurance_amount)

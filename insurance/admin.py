@@ -21,9 +21,13 @@ class CustomerAdmin(admin.ModelAdmin):
     list_filter = ['gender', 'state']
     search_fields = ['first_name', 'last_name', 'street_address', 'city', 'state']
 
+
 class PolicyAdmin(admin.ModelAdmin):
-    list_display = ('start_date', 'end_date', 'insurance_amount', 'customer')
+    list_display = ('start_date', 'end_date', 'insurance_amount', 'policy_type', 'customer', 'policy_status')
     inlines = [HomeInline]
+    list_filter = ['policy_type', 'start_date', 'end_date']
+    search_fields = ['start_date', 'end_date']
+
 
 
 class HomeAdmin(admin.ModelAdmin):
@@ -31,6 +35,6 @@ class HomeAdmin(admin.ModelAdmin):
                     'home_security_system', 'swimming_pool', 'basement', 'policy')
 
 
-admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Customer, CustomerAdmin)
+admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Home, HomeAdmin)
