@@ -14,7 +14,6 @@ class Customer(models.Model):
         ('S', 'Single'),
         ('W', 'Widow/Widower')
     ))
-    customer_type = models.CharField(max_length=2, null=True)
 
     def __str__(self):
         return self.first_name + ' ' + self.last_name
@@ -68,7 +67,7 @@ class Home(models.Model):
 
 
 class Vehicle(models.Model):
-    vin = models.CharField(max_length=1, primary_key=True)
+    vin = models.CharField(max_length=17, primary_key=True)
     model_year = models.IntegerField()
     vehicle_status = models.CharField(max_length=1, choices=(
         ('L', 'Leased'),
@@ -83,6 +82,7 @@ class Driver(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     birth_date = models.DateTimeField()
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, null=True)
 
 
 class Invoice(models.Model):

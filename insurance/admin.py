@@ -15,6 +15,12 @@ class HomeInline(admin.StackedInline):
     show_change_link = True
 
 
+class VehicleInline(admin.StackedInline):
+    model = Vehicle
+    extra = 0
+    show_change_link = True
+
+
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'gender', 'street_address', 'city', 'state')
     inlines = [PolicyInline]
@@ -24,17 +30,23 @@ class CustomerAdmin(admin.ModelAdmin):
 
 class PolicyAdmin(admin.ModelAdmin):
     list_display = ('start_date', 'end_date', 'insurance_amount', 'policy_type', 'customer', 'policy_status')
-    inlines = [HomeInline]
+    inlines = [HomeInline, VehicleInline]
     list_filter = ['policy_type', 'start_date', 'end_date']
     search_fields = ['start_date', 'end_date']
-
 
 
 class HomeAdmin(admin.ModelAdmin):
     list_display = ('purchase_date', 'purchase_price', 'home_type', 'auto_fire_notification',
                     'home_security_system', 'swimming_pool', 'basement', 'policy')
+    list_filter = ['purchase_date', 'home_type', 'auto_fire_notification',
+                   'home_security_system', 'swimming_pool', 'basement']
+
+
+class VehicleAdmin(admin.ModelAdmin):
+    list_display = ('vin', 'model_year', 'vehicle_status', 'policy')
 
 
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Home, HomeAdmin)
+admin.site.register(Vehicle, VehicleAdmin)
