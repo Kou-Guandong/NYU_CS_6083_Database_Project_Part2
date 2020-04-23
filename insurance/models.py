@@ -19,6 +19,7 @@ class Customer(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
+
 class Policy(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
@@ -27,6 +28,7 @@ class Policy(models.Model):
 
     def home_policy_status(self):
         return 'C' if self.end_date >= date.today() else 'P'
+
     # class Meta:
     #    abstract = True
 
@@ -44,22 +46,22 @@ class Home(models.Model):
         ('T', 'Town house')
     ))
     auto_fire_notification = models.CharField(max_length=1, choices=(
-        ('1', 'has automatic fire notification'),
-        ('0', 'NO automatic fire notification')
+        ('1', 'YES'),
+        ('0', 'NO')
     ))
     home_security_system = models.CharField(max_length=1, choices=(
-        ('1', 'has home security system'),
-        ('0', 'NO home security system')
+        ('1', 'YES'),
+        ('0', 'NO')
     ))
     swimming_pool = models.CharField(max_length=1, blank=True, choices=(
-        ('U', 'Underground swimming pool'),
-        ('O', 'Overground swimming pool'),
-        ('I', 'Indoor swimming pool'),
-        ('M', 'Multiple swimming pool')
+        ('U', 'Underground'),
+        ('O', 'Overground'),
+        ('I', 'Indoor'),
+        ('M', 'Multiple')
     ))
     basement = models.CharField(max_length=1, choices=(
-        ('1', 'has basement'),
-        ('0', 'NO basement')
+        ('1', 'YES'),
+        ('0', 'NO')
     ))
     policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
 
