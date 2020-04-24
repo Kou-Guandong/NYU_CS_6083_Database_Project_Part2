@@ -3,13 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
 
-def home(request):
+def index(request):
     return render(request, 'insurance/home.html')
-
-
-# def register(request):
-#     return render(request, 'insurance/register.html')
-
 
 
 def signup(request):
