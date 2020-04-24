@@ -17,6 +17,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls import url
 from insurance import views
+from rest_framework import routers
+from insurance import views
+
+# Routers provide an easy way of automatically determining the URL conf.
+router = routers.DefaultRouter()
+router.register(r'drivers', views.DriverViewSet)
 
 
 urlpatterns = [
@@ -24,4 +30,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    url(r'^', include(router.urls)),
 ]

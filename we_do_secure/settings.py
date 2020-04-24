@@ -30,9 +30,23 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'insurance.apps.InsuranceConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -128,3 +142,11 @@ STATIC_URL = '/static/'
 
 # Add Django_Registration
 ACCOUNT_ACTIVATION_DAYS = 7 # One-week activation window
+
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }

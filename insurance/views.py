@@ -1,7 +1,9 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
-
+from rest_framework import viewsets
+from .serializer import DriverSerializer
+from .models import *
 
 def index(request):
     return render(request, 'insurance/home.html')
@@ -22,3 +24,7 @@ def signup(request):
     return render(request, 'signup.html', {'form': form})
 
 
+# ViewSets define the view behavior.
+class DriverViewSet(viewsets.ModelViewSet):
+    queryset = Driver.objects.all()
+    serializer_class = DriverSerializer
