@@ -3,3 +3,4 @@
 config.yml
 **/migrations
 db_commands
+**/.DS_Store
