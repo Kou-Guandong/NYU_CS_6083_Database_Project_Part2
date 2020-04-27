@@ -26,6 +26,11 @@ class DriverInline(admin.StackedInline):
     extra = 0
     show_change_link = True
 
+class InvoiceInline(admin.StackedInline):
+    model = Invoice
+    extra = 0
+    show_change_link = True
+
 
 class CustomerAdmin(admin.ModelAdmin):
     list_display = ('first_name', 'last_name', 'gender', 'street_address', 'city', 'state')
@@ -35,9 +40,9 @@ class CustomerAdmin(admin.ModelAdmin):
 
 
 class PolicyAdmin(admin.ModelAdmin):
-    list_display = ('start_date', 'end_date', 'insurance_amount', 'policy_type', 'customer', 'policy_status')
-    inlines = [HomeInline, VehicleInline]
-    list_filter = ['policy_type', 'start_date', 'end_date']
+    list_display = ('start_date', 'end_date', 'insurance_amount', 'customer', 'policy_status')
+    inlines = [HomeInline, VehicleInline, InvoiceInline]
+    list_filter = ['start_date', 'end_date']
     search_fields = ['start_date', 'end_date']
 
 
@@ -61,8 +66,14 @@ class DriverAdmin(admin.ModelAdmin):
     search_fields = ['license_number', 'first_name', 'last_name', 'birth_date']
 
 
+class InvoiceAdmin(admin.ModelAdmin):
+    list_display = ('issue_date', 'due_date', 'invoice_amount', 'policy')
+    search_fields = ['issue_date', 'due_date', 'invoice_amount', 'policy']
+
+
 admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Policy, PolicyAdmin)
 admin.site.register(Home, HomeAdmin)
 admin.site.register(Vehicle, VehicleAdmin)
 admin.site.register(Driver, DriverAdmin)
+admin.site.register(Invoice, InvoiceAdmin)

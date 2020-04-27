@@ -24,7 +24,7 @@ class Policy(models.Model):
     end_date = models.DateField()
     insurance_amount = models.FloatField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    policy_type = models.CharField(max_length=1, choices=(('H', 'Home'), ('A', 'Auto')), default='H')
+    # policy_type = models.CharField(max_length=1, choices=(('H', 'Home'), ('A', 'Auto')), default='H')
 
     def policy_status(self):
         return 'C' if self.end_date >= date.today() else 'P'
@@ -86,7 +86,19 @@ class Driver(models.Model):
 
 
 class Invoice(models.Model):
-    policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
-    issue_date = models.DateTimeField()
-    due_date = models.DateTimeField()
+    issue_date = models.DateField()
+    due_date = models.DateField()
     invoice_amount = models.FloatField()
+    policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.policy) + ', invoice issued at %s with amount %s' % (self.issue_date, self.invoice_amount)
+
+
+class Payment(models.Model):
+    payment_date = models.DateField()
+    payment_amount = models.FloatField()
+    invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return str(self.invoice) + 'with %s'
