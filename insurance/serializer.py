@@ -7,3 +7,7 @@ class DriverSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['first_name', 'last_name', 'birth_date']
 
         
+class HomeSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Policy
+        fields = ['insurance_amount']

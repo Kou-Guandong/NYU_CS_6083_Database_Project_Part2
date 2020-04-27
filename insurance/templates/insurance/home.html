@@ -1,20 +1,40 @@
 {% extends 'base.html' %}
-
 {% block content %}
-  <h2>We Do Secure</h2>
-  <div>
-      <a href='accounts/register'><button>Sign Up</button></a>
-  </div>
-  <!-- <form method="post">
+    <div class="info">
+        <p>Welcome to WeDoSecure (WDS), the largest insurance provider company in the United States.</p>
+
+        <p>Our business includes Life, Auto and Home insurance, providing the best service to our customers.</p>
+    </div>
+
+    {% load static %}
+
+    <img src="{% static "img/banner.jpg" %}" alt="My image" width="100%" style="margin: 5px 0 40px;">
+
+    <div class="row button-form">
+        <a href='accounts/register'>
+            <button class="btn-submit">Sign Up</button>
+        </a>
+    </div>
+
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Sign up</button>
-  </form> -->
 
-  <script>
-      $.ajax('drivers/?page=1', {
-          success: (data)=>{
-            console.log(data)
-      }})
-  </script>
+
+    <style>
+        .info {
+            text-align: center;
+            padding: 20px;
+            font-family: "Roboto", "Lucida Grande", "DejaVu Sans", "Bitstream Vera Sans", Verdana, Arial, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+        }
+    </style>
+
+    <script>
+        $.ajax('drivers/?page=1', {
+            success: (data) => {
+                console.log(data)
+            }
+        })
+    </script>
 {% endblock %}

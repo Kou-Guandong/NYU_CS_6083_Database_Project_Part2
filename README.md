@@ -27,4 +27,11 @@ python manage.py runserver
 # Assumptions and Simplifications
 - A customer can be enrolled in either home insurance, auto insurance, or both.
 - An insurance policy can only have 1 customer, but each customer can have more than one insurance policies.
-- An insurance policy can involve either home or automobile, and possibly both in the future.
+- An insurance policy can involve home, automobile, possibly both home and automobile, or even other types of property in the future. (To keep the highest flexibility and extensibility)
+
+# Extra Features Developed
+
+## Indexing
+Index types supported by PostgreSQL: B-tree, Hash, GiST, SP-GiST and GIN.
+
+## REST API
