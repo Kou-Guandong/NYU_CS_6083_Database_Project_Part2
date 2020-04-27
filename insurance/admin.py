@@ -3,33 +3,33 @@ from django.contrib import admin
 from .models import *
 
 
-class PolicyInline(admin.StackedInline):
+class GeneralInline(admin.StackedInline):
+    extra = 0
+    show_change_link = True
+
+
+class PolicyInline(GeneralInline):
     model = Policy
-    extra = 0
-    show_change_link = True
 
 
-class HomeInline(admin.StackedInline):
+class HomeInline(GeneralInline):
     model = Home
-    extra = 0
-    show_change_link = True
 
 
-class VehicleInline(admin.StackedInline):
+class VehicleInline(GeneralInline):
     model = Vehicle
-    extra = 0
-    show_change_link = True
 
 
-class DriverInline(admin.StackedInline):
+class DriverInline(GeneralInline):
     model = Driver
-    extra = 0
-    show_change_link = True
 
-class InvoiceInline(admin.StackedInline):
+
+class InvoiceInline(GeneralInline):
     model = Invoice
-    extra = 0
-    show_change_link = True
+
+
+class PaymentInline(GeneralInline):
+    model = Payment
 
 
 class CustomerAdmin(admin.ModelAdmin):
@@ -69,6 +69,12 @@ class DriverAdmin(admin.ModelAdmin):
 class InvoiceAdmin(admin.ModelAdmin):
     list_display = ('issue_date', 'due_date', 'invoice_amount', 'policy')
     search_fields = ['issue_date', 'due_date', 'invoice_amount', 'policy']
+    inlines = [PaymentInline]
+
+
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ('payment_date', 'payment_amount', 'invoice')
+    search_fields = ['payment_date', 'payment_amount', 'invoice']
 
 
 admin.site.register(Customer, CustomerAdmin)
@@ -77,3 +83,4 @@ admin.site.register(Home, HomeAdmin)
 admin.site.register(Vehicle, VehicleAdmin)
 admin.site.register(Driver, DriverAdmin)
 admin.site.register(Invoice, InvoiceAdmin)
+admin.site.register(Payment, PaymentAdmin)
