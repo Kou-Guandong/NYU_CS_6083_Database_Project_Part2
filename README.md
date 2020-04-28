@@ -1,6 +1,6 @@
 This is a course project for CS-GY 6083 Spring 2020 semester in NYU Tandon School of Engineering.
 
-# Environment & Skillet
+# Environment & Toolset
 - Python 3.7
 - PostgreSQL
 
