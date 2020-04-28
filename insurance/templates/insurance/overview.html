@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    Overview
+
+    <script>
+        $.ajax('/overviewAPI', {
+            success: (data) => {
+                console.log(data)
+            }
+        })
+    </script>
+{% endblock %}

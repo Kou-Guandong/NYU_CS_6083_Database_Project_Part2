@@ -21,14 +21,16 @@ from django.conf.urls.static import static
 from rest_framework import routers
 from insurance import views
 
-
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'drivers', views.DriverViewSet)
+router.register(r'customers', views.CustomerViewSet)
 
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('overview/', views.overview),
+    path('overviewAPI/', views.overviewAPI),
     path('admin/', admin.site.urls),
     path('accounts/', include('django_registration.backends.one_step.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

@@ -1,6 +1,12 @@
 from insurance.models import *
 from rest_framework import serializers
 
+class CustomerSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Customer
+        fields = ['first_name', 'last_name', 'gender']
+
+
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Driver
