@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import date
+from django.db.models import Subquery, OuterRef
 
 
 class Customer(models.Model):
@@ -18,13 +19,23 @@ class Customer(models.Model):
     def __str__(self):
         return self.first_name + ' ' + self.last_name
 
+    def active_policies(self):
+        now = date.today()
+        policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
+        return policies.count()
+
+    def homes(self):
+        now = date.today()
+        policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
+        homes = Home.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
+        return homes.count()
+
 
 class Policy(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     insurance_amount = models.FloatField()
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    # policy_type = models.CharField(max_length=1, choices=(('H', 'Home'), ('A', 'Auto')), default='H')
 
     def policy_status(self):
         return 'C' if self.end_date >= date.today() else 'P'
@@ -93,6 +104,14 @@ class Invoice(models.Model):
 
     def __str__(self):
         return str(self.policy) + ', invoice issued at %s with amount %s' % (self.issue_date, self.invoice_amount)
+
+    def paid(self):
+        payments = Payment.objects.filter(invoice_id=self.id)
+        paid = payments.aggregate(models.Sum('payment_amount'))['payment_amount__sum']
+        return paid or 0
+
+    def to_be_paid(self):
+        return round((self.invoice_amount - self.paid()) * 100) / 100
 
 
 class Payment(models.Model):

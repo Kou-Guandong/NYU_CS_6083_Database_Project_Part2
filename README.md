@@ -6,21 +6,26 @@ This is a course project for CS-GY 6083 Spring 2020 semester in NYU Tandon Schoo
 
 
 ## Install dependencies
-```shell
+```shell script
 brew install postgresql # if PostgreSQL not installed 
 pip install psycopg2-binary==2.8.3  # use a stable version  
 ```
 
 ## Migrate database when model changed
-```sh
+```shell script
 python manage.py makemigrations insurance
 python manage.py migrate
+```
+
+## Reset sequence for data tables
+```shell script
+python manage.py sqlsequencereset insurance| python manage.py dbshell
 ```
 
 # Development
 
 ## Back-End
-```shell
+```shell script
 python manage.py runserver
 ```
 
