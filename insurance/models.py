@@ -98,6 +98,9 @@ class Driver(models.Model):
     birth_date = models.DateField()
     vehicle_vin = models.ForeignKey(Vehicle, db_column='vehicle_vin', on_delete=models.SET_NULL, null=True)
 
+    def age(self):
+        return date.today().year - self.birth_date.year
+
     def __str__(self):
         return '%s %s born on %s' % (self.first_name, self.last_name, self.birth_date)
 

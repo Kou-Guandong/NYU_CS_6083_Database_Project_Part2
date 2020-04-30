@@ -66,7 +66,7 @@ class VehicleAdmin(InsuranceAdmin):
 
 
 class DriverAdmin(InsuranceAdmin):
-    list_display = ('first_name', 'last_name', 'license_number', 'birth_date')
+    list_display = ('first_name', 'last_name', 'license_number', 'birth_date', 'age')
     search_fields = ['license_number', 'first_name', 'last_name', 'birth_date']
 
 

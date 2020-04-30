@@ -31,7 +31,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 
 @api_view()
-def overviewAPI(request):
+def overview_api(request):
     return Response(
         {
             'num_customers': Customer.objects.count(),
@@ -42,31 +42,6 @@ def overviewAPI(request):
         }
     )
 
-def verify(request):
-    u = request.POST['username']
-    p = request.POST['password']
-    user = authenticate(username=u, password=p)
-    if user is not None:
-        if user.is_active:
-            # You need to call `login` with `request` AND `user`
-            login(request, user)
-            print("logged in")
-            return redirect('/')
-    else:
-        return redirect('/accounts/login/')
 
-
-
-#
-# @login_required(login_url='/accounts/login/')
-# def my_view(request):
-#     username = request.POST['username']
-#     password = request.POST['password']
-#     user = authenticate(request, username=username, password=password)
-#     if user is not None:
-#         login(request, user)
-#         # Redirect to a success page.
-#         print('login ok')
-#     else:
-#         # Return an 'invalid login' error message.
-#         print('not valid login')
+def user_profile(request):
+    return render(request, 'insurance/profile.html')
