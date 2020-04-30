@@ -17,18 +17,18 @@ class Customer(models.Model):
     ))
 
     def __str__(self):
-        return self.first_name + ' ' + self.last_name
+        return self.first_name + ' ' + self.last_name + ' living in ' + self.city
 
     def active_policies(self):
         now = date.today()
         policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
         return policies.count()
 
-    def homes(self):
-        now = date.today()
-        policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
-        homes = Home.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
-        return homes.count()
+    # def homes(self):
+    #     now = date.today()
+    #     policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
+    #     homes = Home.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
+    #     return homes.count()
 
 
 class Policy(models.Model):
@@ -87,6 +87,9 @@ class Vehicle(models.Model):
     ))
     policy = models.ForeignKey(Policy, on_delete=models.SET_NULL, null=True)
 
+    def __str__(self):
+        return '%s, model year %s' % (self.vin, self.model_year)
+
 
 class Driver(models.Model):
     license_number = models.CharField(max_length=17, primary_key=True)
@@ -94,6 +97,9 @@ class Driver(models.Model):
     last_name = models.CharField(max_length=30)
     birth_date = models.DateField()
     vehicle_vin = models.ForeignKey(Vehicle, db_column='vehicle_vin', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return '%s %s born on %s' % (self.first_name, self.last_name, self.birth_date)
 
 
 class Invoice(models.Model):
@@ -120,4 +126,4 @@ class Payment(models.Model):
     invoice = models.ForeignKey(Invoice, on_delete=models.SET_NULL, null=True)
 
     def __str__(self):
-        return str(self.invoice) + 'with %s'
+        return '%s paid on %s for the invoice %s' % (self.payment_amount, self.payment_date, str(self.invoice))

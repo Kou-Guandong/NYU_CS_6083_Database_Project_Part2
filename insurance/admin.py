@@ -71,7 +71,7 @@ class DriverAdmin(InsuranceAdmin):
 
 
 class InvoiceAdmin(InsuranceAdmin):
-    list_display = ('issue_date', 'due_date', 'invoice_amount', 'policy', 'paid', 'to_be_paid')
+    list_display = ('issue_date', 'due_date', 'policy', 'invoice_amount', 'paid', 'to_be_paid')
     search_fields = ['issue_date', 'due_date', 'invoice_amount', 'policy']
     inlines = [PaymentInline]
 
