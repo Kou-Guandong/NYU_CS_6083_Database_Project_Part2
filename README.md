@@ -41,6 +41,7 @@ python manage.py sqlsequencereset insurance | python manage.py dbshell
     - payment method and period
 - Once a deal is made, WDS staff and the customer will confirm and sign a contract with insurance policy;
 Later on, invoice(s) will be mailed to customer, and the customer needs to make payment(s)
+- In this more realistic scenario, the system consists of a powerful back-end admin and simplified front-end web pages  
 
 ## Relations of Entities
 - A customer can be engaged in one or more policies.
@@ -54,9 +55,11 @@ Later on, invoice(s) will be mailed to customer, and the customer needs to make 
 ## Security
 - Anti XSS via CSRF tokens
 - Anti SQL injection via ORM connected to database
+- Encryption of sensitive data (password, sessionID, etc.) 
 
 ## Indexing
-Index types supported by PostgreSQL: B-tree, Hash, GiST, SP-GiST and GIN.
+- Index types supported by PostgreSQL: B-tree, Hash, GiST, SP-GiST and GIN.
+- 
 
 ## REST API
 Achieved by using [`django-rest-framework`](https://www.django-rest-framework.org/)

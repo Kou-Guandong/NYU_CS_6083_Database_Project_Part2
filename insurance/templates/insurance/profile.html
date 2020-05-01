@@ -5,7 +5,7 @@
     <h2>User Profile</h2>
 
     {% if user.is_authenticated %}
-        Hi {{ user.username }}!
+        Hi {{ user.username }}! Welcome to our website. You may now have an overview of our data.
     {% else %}
         <p>You are not logged in</p>
         <a href="{% url 'login' %}">login</a>

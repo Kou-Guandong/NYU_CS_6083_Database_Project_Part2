@@ -32,19 +32,6 @@ class Customer(models.Model):
     #     return homes.count()
 
 
-class UserPolicy(models.Model):
-    start_date = models.DateField()
-    end_date = models.DateField()
-    insurance_amount = models.FloatField()
-    customer = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    def policy_status(self):
-        return 'C' if self.end_date >= date.today() else 'P'
-
-    def __str__(self):
-        return self.customer.first_name + ' ' + self.customer.last_name + ': ' + str(self.insurance_amount)
-
-
 class Policy(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()

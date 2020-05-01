@@ -22,20 +22,41 @@
             padding: 12px;
             border-radius: 8px;
         }
+
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
     </style>
 </head>
 <body>
-<div class="page-header">
-    <h1 style="text-align: center;"><a href="/">WDS Home</a></h1>
-</div>
 
-<div class="content container">
-    <div class="row">
-        <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
+<div class="wrapper">
+
+    <div class="col-8">
+        <div class="page-header">
+            <span><h1 style="text-align: center; display: inline-block"><a href="/">WDS Home</a></h1></span>
+            <span style="margin-left: 40px;">
+        {% if user.is_authenticated %}
+            {{ user.username }} <a href="/accounts/logout/"> Log Out</a>
+        {% else %}
+            <a href="/accounts/login/">Log in</a>
+        {% endif %}
+        </span>
         </div>
     </div>
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+
 </div>
+
 </body>
 </html>

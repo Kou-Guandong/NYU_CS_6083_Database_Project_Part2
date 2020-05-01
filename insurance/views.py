@@ -1,13 +1,14 @@
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from rest_framework import viewsets
-from .serializer import *
-from .models import *
-
+from django.db.models import Sum
+from django.http import Http404
+from rest_framework import viewsets, status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from django.db.models import Sum
+from rest_framework.views import APIView
+from .serializer import *
+from .models import *
 
 
 def index(request):
@@ -31,6 +32,21 @@ class CustomerViewSet(viewsets.ModelViewSet):
     serializer_class = CustomerSerializer
 
 
+class HomeList(generics.ListCreateAPIView):
+    queryset = Home.objects.all()
+    serializer_class = HomeSerializer
+
+
+class HomeDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Home.objects.all()
+    serializer_class = HomeSerializer
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
 @api_view()
 @login_required()
 def overview_api(request):
@@ -45,6 +61,6 @@ def overview_api(request):
     )
 
 
+@login_required()
 def user_profile(request):
-
     return render(request, 'insurance/profile.html')
