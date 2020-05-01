@@ -1,6 +1,7 @@
 from django.db import models
 from datetime import date
 from django.db.models import Subquery, OuterRef
+from django.contrib.auth.models import User
 
 
 class Customer(models.Model):
@@ -29,6 +30,19 @@ class Customer(models.Model):
     #     policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
     #     homes = Home.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
     #     return homes.count()
+
+
+class UserPolicy(models.Model):
+    start_date = models.DateField()
+    end_date = models.DateField()
+    insurance_amount = models.FloatField()
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def policy_status(self):
+        return 'C' if self.end_date >= date.today() else 'P'
+
+    def __str__(self):
+        return self.customer.first_name + ' ' + self.customer.last_name + ': ' + str(self.insurance_amount)
 
 
 class Policy(models.Model):
