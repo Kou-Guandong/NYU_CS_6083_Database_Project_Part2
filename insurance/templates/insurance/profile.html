@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     <h2>User Profile</h2>
 
     {% if user.is_authenticated %}
@@ -10,5 +11,8 @@
         <a href="{% url 'login' %}">login</a>
     {% endif %}
 
+    <div style="margin-top: 30px; text-align: center">
+        <button><a href="/overview/">Data Overview</a></button>
+    </div>
 
 {% endblock %}

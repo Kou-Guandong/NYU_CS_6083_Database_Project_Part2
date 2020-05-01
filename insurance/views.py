@@ -14,6 +14,7 @@ def index(request):
     return render(request, 'insurance/home.html')
 
 
+@login_required()
 def overview(request):
     return render(request, 'insurance/overview.html')
 
@@ -31,6 +32,7 @@ class CustomerViewSet(viewsets.ModelViewSet):
 
 
 @api_view()
+@login_required()
 def overview_api(request):
     return Response(
         {
@@ -44,4 +46,5 @@ def overview_api(request):
 
 
 def user_profile(request):
+
     return render(request, 'insurance/profile.html')

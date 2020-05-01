@@ -53,7 +53,7 @@ Later on, invoice(s) will be mailed to customer, and the customer needs to make 
 
 ## Security
 - Anti XSS via CSRF tokens
-- Anti SQL injection via models connected to database
+- Anti SQL injection via ORM connected to database
 
 ## Indexing
 Index types supported by PostgreSQL: B-tree, Hash, GiST, SP-GiST and GIN.
@@ -61,6 +61,8 @@ Index types supported by PostgreSQL: B-tree, Hash, GiST, SP-GiST and GIN.
 ## REST API
 Achieved by using [`django-rest-framework`](https://www.django-rest-framework.org/)
 
+
+# Selection of Database and Frameworks
 ## Pros and Cons of PostgreSQL
 
 ### Advantages of PostgreSQL
@@ -72,3 +74,12 @@ Achieved by using [`django-rest-framework`](https://www.django-rest-framework.or
 
 ### Disadvantages of PostgreSQL
 - Lower speed for read-heavy operations than MySQL
+
+## Django
+features: Model-View-Template (MVT)
+- Efficient development
+    - auto-generated database tables
+    - auto-generated admin UI
+- Security
+    - validation of form fields
+    - user session, authentication management 

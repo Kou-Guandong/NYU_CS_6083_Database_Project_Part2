@@ -1,12 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2>Overview</h2>
+
+    <style>
+    .data {
+        color: cadetblue;
+        font-size: 28px;
+    }
+    </style>
+
+    <h2>Overview of our data</h2>
 
     <div>
         <p>
             Our business has served <span class="data" id="num_customers"></span> customers,
             covering <span class="data" id="total_homes_insured"></span> homes,
-            summing up to <span class="data" id="total_homes_value"></span> $;
+            summing up to <span class="data" id="total_homes_value"></span> USD;
             also covering <span class="data" id="total_vehicles_insured"></span> vehicles.
         </p>
     </div>
@@ -22,4 +30,5 @@
             }
         })
     </script>
+
 {% endblock %}
