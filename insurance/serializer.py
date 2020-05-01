@@ -5,7 +5,7 @@ from rest_framework import serializers
 class CustomerSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Customer
-        fields = ['first_name', 'last_name', 'gender']
+        fields = ['first_name', 'last_name', 'gender', 'street_address', 'state', 'city']
 
 
 class DriverSerializer(serializers.HyperlinkedModelSerializer):
@@ -21,13 +21,7 @@ class HomeSerializer(serializers.HyperlinkedModelSerializer):
                   'home_security_system', 'swimming_pool', 'basement']
 
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = User
-        fields = ['username', 'email', 'is_staff', 'first_name', 'last_name']
-
-
-class CustomerPolicySerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Customer
-        fields = ['first_name', 'last_name', 'gender']
+# class UserSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = Customer
+#         fields = ['first_name', 'last_name']

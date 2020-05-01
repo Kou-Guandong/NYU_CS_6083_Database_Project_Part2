@@ -2,13 +2,12 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.db.models import Sum
-from django.http import Http404
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, status, generics, permissions
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from .serializer import *
 from .models import *
+from insurance.permissions import *
 
 
 def index(request):
@@ -25,26 +24,31 @@ def overview(request):
 class DriverViewSet(viewsets.ModelViewSet):
     queryset = Driver.objects.all()
     serializer_class = DriverSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class CustomerViewSet(viewsets.ModelViewSet):
     queryset = Customer.objects.order_by('gender')
     serializer_class = CustomerSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class HomeList(generics.ListCreateAPIView):
     queryset = Home.objects.all()
     serializer_class = HomeSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
 class HomeDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Home.objects.all()
     serializer_class = HomeSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
 
-class UserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class CustomerDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Customer.objects.all()
+    serializer_class = CustomerSerializer
+    permission_classes = [IsOwnerOnly]
 
 
 @api_view()

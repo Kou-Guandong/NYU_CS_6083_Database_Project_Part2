@@ -17,6 +17,8 @@ class Customer(models.Model):
         ('W', 'Widow/Widower')
     ))
 
+    account = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+
     def __str__(self):
         return self.first_name + ' ' + self.last_name + ' living in ' + self.city
 
@@ -24,12 +26,6 @@ class Customer(models.Model):
         now = date.today()
         policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
         return policies.count()
-
-    # def homes(self):
-    #     now = date.today()
-    #     policies = Policy.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
-    #     homes = Home.objects.filter(customer_id=self.id, start_date__lte=now, end_date__gte=now)
-    #     return homes.count()
 
 
 class Policy(models.Model):

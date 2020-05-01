@@ -5,14 +5,38 @@
     <h2>User Profile</h2>
 
     {% if user.is_authenticated %}
-        Hi {{ user.username }}! Welcome to our website. You may now have an overview of our data.
+        Hi {{ user.username }}! Welcome to our website.
     {% else %}
         <p>You are not logged in</p>
         <a href="{% url 'login' %}">login</a>
     {% endif %}
 
     <div style="margin-top: 30px; text-align: center">
+        <p>first_name: <span id="first_name"> </span></p>
+        <p>last_name: <span id="last_name"> </span></p>
+        <p>street_address: <span id="street_address"> </span></p>
+        <p>city: <span id="city"> </span></p>
+        <p>state: <span id="state"> </span></p>
+    </div>
+
+    <div style="margin-top: 30px; text-align: center">
+        <h4>You may now have an overview of our data.</h4>
         <button><a href="/overview/">Data Overview</a></button>
     </div>
+
+    <script>
+        {#$.ajax('/customers/{{ customer.id }}', {#}
+        $.ajax('/customers/17', {
+            success: (data) => {
+                const {first_name, last_name, gender, street_address, city, state} = data
+                $('#first_name').html(first_name);
+                $('#last_name').html(last_name);
+                $('#gender').html(gender);
+                $('#street_address').html(street_address);
+                $('#city').html(city);
+                $('#state').html(state);
+            }
+        })
+    </script>
 
 {% endblock %}

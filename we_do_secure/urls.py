@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
 from insurance import views
 
 from django.conf.urls import include, url
@@ -23,7 +22,7 @@ urlpatterns = \
         path('overviewAPI/', views.overview_api),
         path('homes/', views.HomeList.as_view()),
         path('homes/<int:pk>/', views.HomeDetail.as_view()),
-        path('users/<int:pk>/', views.UserDetail.as_view()),
+        path('customers/<int:pk>/', views.CustomerDetail.as_view()),
         path('admin/', admin.site.urls),
         path('accounts/register/',
              RegistrationView.as_view(success_url='/accounts/profile/'),
@@ -31,6 +30,7 @@ urlpatterns = \
         path('accounts/', include('django_registration.backends.one_step.urls')),
         path('accounts/', include('django.contrib.auth.urls')),
         path('accounts/profile/', views.user_profile),
+        path('api-auth/', include('rest_framework.urls')),
         url(r'^', include(router.urls)),
     ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
