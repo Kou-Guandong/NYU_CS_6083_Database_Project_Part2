@@ -53,7 +53,7 @@ def overview_api(request):
     return Response(
         {
             'num_customers': Customer.objects.count(),
-            'num_policies': Policy.objects.count(),
+            'num_drivers': Driver.objects.count(),
             'total_homes_insured': Home.objects.count(),
             'total_vehicles_insured': Vehicle.objects.count(),
             'total_homes_value': Home.objects.aggregate(Sum('purchase_price'))['purchase_price__sum'],

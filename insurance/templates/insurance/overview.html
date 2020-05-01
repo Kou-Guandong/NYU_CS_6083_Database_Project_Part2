@@ -13,17 +13,19 @@
     <div>
         <p>
             Our business has served <span class="data" id="num_customers"></span> customers,
-            covering <span class="data" id="total_homes_insured"></span> homes,
-            summing up to <span class="data" id="total_homes_value"></span> USD;
-            also covering <span class="data" id="total_vehicles_insured"></span> vehicles.
+            covered <span class="data" id="total_homes_insured"></span> homes,
+            summing up to <span class="data" id="total_homes_value"></span> USD; <br>
+            we have also covered <span class="data" id="total_vehicles_insured"></span> vehicles,
+            driven by <span class="data" id="num_drivers"></span> drivers.
         </p>
     </div>
 
     <script>
         $.ajax('/overviewAPI', {
             success: (data) => {
-                const {num_customers, total_homes_insured, total_vehicles_insured, total_homes_value} = data
+                const {num_customers, num_drivers, total_homes_insured, total_vehicles_insured, total_homes_value} = data
                 $('#num_customers').html(num_customers);
+                $('#num_drivers').html(num_drivers);
                 $('#total_homes_insured').html(total_homes_insured);
                 $('#total_homes_value').html(total_homes_value);
                 $('#total_vehicles_insured').html(total_vehicles_insured);
